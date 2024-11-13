@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador MVC</title>
+    <style>
+        /* CSS interno */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .counter {
+            font-size: 3em;
+            margin: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .button {
+            font-size: 2em;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .button:active {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="counter" id="counter">0</div>
+        <div class="buttons">
+            <button class="button" id="decrement">-</button>
+            <button class="button" id="increment">+</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript interno (padrão MVC)
+
+        // Model
+        const model = {
+            value: 0,
+            increment() {
+                this.value++;
+                view.render();
+            },
+            decrement() {
+                this.value--;
+                view.render();
+            }
+        };
+
+        // View
+        const view = {
+            counterElement: document.getElementById('counter'),
+            render() {
+                this.counterElement.textContent = model.value;
+            }
+        };
+
+        // Controller
+        const controller = {
+            init() {
+                document.getElementById('increment').addEventListener('click', () => model.increment());
+                document.getElementById('decrement').addEventListener('click', () => model.decrement());
+                view.render();
+            }
+        };
+
+        // Inicializa o controlador
+        controller.init();
+    </script>
+</body>
+</html>
